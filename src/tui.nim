@@ -131,10 +131,10 @@ proc mouseevent(b: bool = on) =
 
 
 var tcs: seq[Termios]
-proc tcSave() =
+proc tcSave*() =
     tcs.setLen tcs.len+1
     discard tcGetAttr(STDIN_FILENO, tcs[^1].addr)
-proc tcPop() =
+proc tcPop*() =
     discard tcSetAttr(STDIN_FILENO, TCSANOW, tcs[^1].addr)
     discard tcs.pop()
 
@@ -355,7 +355,6 @@ proc getkey*(): Key =
                             res.add c
                         (res.parseInt, released)
                         
-                
                 mouse.x = px
                 mouse.y = py
                 let
@@ -395,7 +394,6 @@ proc getkey*(): Key =
     of '0'..'9':
         return KeyKind(KeyKind.N0.ord + (ch.ord - '0'.ord))
     else:
-        rootwindow.curpos = Position(line: 10, col: 0)
         return Key.None
     
 
