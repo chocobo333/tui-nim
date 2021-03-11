@@ -382,6 +382,8 @@ proc getkey*(): Key =
                     KeyKind(KeyKind.MBS.ord + btn)
                 else:
                     KeyKind(KeyKind.MB1.ord + btn)
+                rootwindow.move(0, 0)
+                rootwindow.writeLine fmt"{res}{mouse.drag}{released}({px}, {py})"
                 return (modifier, res)
             else:
                 discard
